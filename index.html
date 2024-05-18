@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="style.css" />
+    <title>Library</title>
+  </head>
+  <body>
+    <header>
+      <h1 id="title">Library</h1>
+      <button id="add-book" class="add-new-book-btn">Add Book</button>
+    </header>
+    <dialog>
+      <form action="" method="dialog">
+        <img src="./imgs/close-icon.png" alt="Close icon" class="x-icon" />
+        <label class="lb" for="book-title">Title</label>
+        <input type="text" name="book-title" id="book-title" required />
+
+        <label class="lb" for="book-author">Author</label>
+        <input type="text" name="book-author" id="book-author" required />
+
+        <label class="lb" for="book-pages">Pages</label>
+        <input
+          type="number"
+          name="book-pages"
+          id="book-pages"
+          min="0"
+          required
+        />
+
+        <div class="checkbox-wrapper-4">
+          <input class="inp-cbx" id="morning" type="checkbox" checked />
+          <label class="cbx" for="morning"
+            ><span>
+              <svg width="12px" height="10px">
+                <use xlink:href="#check-4"></use></svg></span
+            ><span>Read</span></label
+          >
+          <svg class="inline-svg">
+            <symbol id="check-4" viewbox="0 0 12 10">
+              <polyline points="1.5 6 4.5 9 10.5 1"></polyline>
+            </symbol>
+          </svg>
+        </div>
+
+        <button type="submit" id="sub">Submit</button>
+      </form>
+    </dialog>
+
+    <div class="library"></div>
+
+    <script src="script.js"></script>
+  </body>
+</html>
