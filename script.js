@@ -11,7 +11,7 @@ let isReadBtn = document.querySelectorAll(".read");
 const deleteBtn = document.querySelectorAll(".delete");
 
 let bookTitle, bookAuthor, bookPages, bookIsRead;
-const myLibrary = [];
+let myLibrary = [];
 
 function Book(title, author, pages, isRead) {
   this.title = title;
@@ -33,6 +33,7 @@ function createBook() {
 // Display books
 function displayBooks() {
   library.innerHTML = "";
+
   for (const book of myLibrary) {
     let text;
     if (book.isRead) {
@@ -41,15 +42,21 @@ function displayBooks() {
       text = "Not Read";
     }
     const html = `<div class="book">
-      <h1>${book.title}</h1>
+      <h1 class="title">${book.title}</h1>
       <h2>By ${book.author}</h2>
       <h2>Pages: ${book.pages}</h2>
       <button class="read">${text}</button>
       <button class="delete">Remove</button>
     </div>
   `;
-    library.insertAdjacentHTML("afterend", html);
+    library.insertAdjacentHTML("beforeend", html);
   }
+}
+
+function submitBook1() {
+  createBook();
+  displayBooks();
+  isReadBtn = document.querySelectorAll(".read");
 }
 
 addBookBtn.addEventListener("click", () => {
@@ -65,13 +72,9 @@ xBtn.addEventListener("click", () => {
   modal.close();
 });
 
-submitBook.addEventListener("click", (e) => {
-  // e.preventDefault();
-  createBook();
-  displayBooks();
-  isReadBtn = document.querySelectorAll(".read");
-});
+submitBook.addEventListener("click", submitBook1);
 
+// Toggle isRead
 document.addEventListener("click", (e) => {
   if (e.target.classList.contains("read")) {
     if (e.target.textContent == "Read") {
@@ -83,12 +86,18 @@ document.addEventListener("click", (e) => {
       e.target.style.backgroundColor = "#9fff9c";
       e.target.style.padding = " 10px 90px 10px 90px";
     }
-    console.log(e.target);
   }
 });
 
+// Delete book
 document.addEventListener("click", function (e) {
   if (e.target.classList.contains("delete")) {
+    // Removing the book from the DOM
     e.target.parentNode.parentNode.removeChild(e.target.parentNode);
+
+    // Removing it from myLibrary array
+    myLibrary = myLibrary.filter(
+      (book) => !(book.title == e.target.parentNode.children[0].textContent)
+    );
   }
 });
